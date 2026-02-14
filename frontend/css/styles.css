@@ -181,6 +181,33 @@ a:hover {
   flex-direction: column;
 }
 
+/* Menu grid: responsive columns, cards fit-content width */
+.menu-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+.menu-grid .menu-card {
+  width: fit-content;
+  max-width: min(320px, 100%);
+  min-width: 260px;
+}
+
+@media (min-width: 576px) {
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .menu-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
 .menu-card:hover {
   transform: scale(1.03);
   box-shadow: var(--shadow-glow);
@@ -210,6 +237,7 @@ a:hover {
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .menu-card-title {
@@ -464,12 +492,6 @@ a:hover {
 @media (min-width: 769px) {
   .container {
     padding: 0 1.5rem;
-  }
-
-  .menu-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
   }
 }
 
