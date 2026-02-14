@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu Management — LBRCE Food Court</title>
+
+    <!-- Bootstrap 5 CSS (CDN) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!--
+    ============================================
+    Navigation Bar
+    ============================================
+    - Same as admin.html
+    - "Menu Management" link is active
+    -->
+
+    <!--
+    ============================================
+    Admin Menu Management Page
+    ============================================
+    - Requires login + admin role
+
+    STALL SELECTOR:
+    - Dropdown or tab group to pick a stall
+    - Options fetched from: GET /api/menu/stalls
+    - Selecting a stall loads its menu items below
+
+    ADD NEW ITEM BUTTON:
+    - "Add Menu Item" button (top right)
+    - Opens the Add/Edit modal
+
+    MENU ITEMS TABLE:
+    - Bootstrap table showing items for the selected stall
+    - Columns: Image (thumbnail), Name, Category (badge), Price, Available (toggle), Actions
+    - Actions per row:
+      - "Edit" button → opens Add/Edit modal pre-filled
+      - "Delete" button → confirmation dialog → DELETE /api/admin/menu/items/:id
+    - Availability toggle: clicking updates is_available via PUT
+
+    ADD/EDIT MODAL:
+    - Bootstrap modal with form:
+      - Stall (read-only, pre-selected)
+      - Name (text input, required)
+      - Description (textarea)
+      - Price (number input, required, min 0)
+      - Category (select dropdown: main, snack, beverage, dessert)
+      - Image file input (accept="image/*")
+      - Image preview (shows current image or selected file preview)
+    - On submit:
+      1. If image file selected:
+         a. Upload to Supabase Storage bucket 'menu-images'
+            const { data, error } = await supabase.storage.from('menu-images').upload(filename, file)
+         b. Get public URL:
+            const { data: urlData } = supabase.storage.from('menu-images').getPublicUrl(data.path)
+         c. Set image_url = urlData.publicUrl
+      2. Build request body with form data + image_url
+      3. If adding: POST /api/admin/menu/items
+      4. If editing: PUT /api/admin/menu/items/:id
+      5. On success: close modal, refresh table, show toast
+      6. On error: show error message in modal
+
+    IMAGE UPLOAD NOTES:
+    - Images go directly to Supabase Storage (not through the API)
+    - File name should be unique (prefix with timestamp): `${Date.now()}-${file.name}`
+    - Show upload progress or spinner while uploading
+    - Preview the image before submitting the form
+    -->
+
+    <!-- Bootstrap 5 JS Bundle (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/admin-menu.js"></script>
+  </body>
+</html>

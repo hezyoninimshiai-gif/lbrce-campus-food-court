@@ -1,0 +1,111 @@
+/*
+ * Custom Styles — LBRCE Campus Food Court
+ * ========================================
+ * Bootstrap handles most styling via CDN.
+ * This file contains only project-specific customizations.
+ *
+ * Guidelines:
+ * - Use Bootstrap classes in HTML wherever possible
+ * - Only add custom CSS here when Bootstrap doesn't cover it
+ * - Mobile-first: base styles for mobile, then @media for larger screens
+ */
+
+/* ──────────────────────────────────────────────
+   CSS Variables (Theme Colors)
+   ──────────────────────────────────────────────
+   Define project colors here.
+   Use these in custom components for consistency.
+
+   :root {
+       --fc-primary: #2563eb;      (blue - main brand color)
+       --fc-success: #16a34a;      (green - approved/ready)
+       --fc-warning: #d97706;      (amber - pending)
+       --fc-danger: #dc2626;       (red - rejected)
+       --fc-bg: #f8f9fa;           (light gray background)
+   }
+*/
+
+/* ──────────────────────────────────────────────
+   Body & Layout
+   ──────────────────────────────────────────────
+   - Set background color
+   - Set default font (Bootstrap's default is fine)
+   - Min-height for sticky footer
+*/
+
+/* ──────────────────────────────────────────────
+   Navbar Customizations
+   ──────────────────────────────────────────────
+   - Custom brand styling if needed
+   - Active link highlight
+*/
+
+/* ──────────────────────────────────────────────
+   Food Stall Cards (index.html)
+   ──────────────────────────────────────────────
+   - Hover effect (subtle shadow or scale)
+   - Image aspect ratio (object-fit: cover)
+   - Fixed card height for uniform grid
+*/
+
+/* ──────────────────────────────────────────────
+   Menu Item Cards (menu.html)
+   ──────────────────────────────────────────────
+   - Dish image styling (fixed height, object-fit: cover)
+   - Price highlight styling
+   - Add to cart button animation
+   - Category badge colors
+*/
+
+/* ──────────────────────────────────────────────
+   Cart Page (cart.html)
+   ──────────────────────────────────────────────
+   - Quantity selector (+/- buttons) styling
+   - Cart summary card styling
+   - Floating cart button (fixed position bottom-right)
+*/
+
+/* ──────────────────────────────────────────────
+   Order Status Badges
+   ──────────────────────────────────────────────
+   - Pending: warning yellow
+   - Approved: info blue
+   - Ready: success green
+   - Completed: secondary gray
+   - Rejected: danger red
+   (These map to Bootstrap badge classes, but add custom tweaks here)
+*/
+
+/* ──────────────────────────────────────────────
+   Admin Dashboard
+   ──────────────────────────────────────────────
+   - Stats cards: icon + number layout
+   - Pending order cards: action button layout
+   - Orders table: responsive on mobile
+*/
+
+/* ──────────────────────────────────────────────
+   Image Upload (admin-menu.html)
+   ──────────────────────────────────────────────
+   - Image preview area styling
+   - Upload progress indicator
+   - Thumbnail in menu items table
+*/
+
+/* ──────────────────────────────────────────────
+   Responsive Adjustments
+   ──────────────────────────────────────────────
+   @media (max-width: 576px) {
+       - Stack cards vertically
+       - Full-width buttons
+       - Smaller font sizes if needed
+   }
+*/
+
+/* ──────────────────────────────────────────────
+   Utility Classes
+   ──────────────────────────────────────────────
+   - .price-text { font-weight: bold; color: var(--fc-primary); }
+   - .loading-spinner { text-align: center; padding: 2rem; }
+   - .empty-state { text-align: center; padding: 3rem; color: #6c757d; }
+*/

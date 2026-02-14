@@ -1,0 +1,46 @@
+# ──────────────────────────────────────────────
+# Server Setup Playbook
+# ──────────────────────────────────────────────
+# Run this ONCE on a fresh Ubuntu server to install Docker.
+#
+# Usage:
+#   ansible-playbook -i hosts.ini setup.yml
+#
+# What it does:
+#   1. Updates apt package cache
+#   2. Installs Docker
+#   3. Starts and enables Docker service
+#   4. Adds the SSH user to the docker group
+#      (so you can run docker without sudo)
+# ──────────────────────────────────────────────
+
+---
+- name: Setup Ubuntu server for Docker
+  hosts: servers
+  become: yes # Run as root (sudo)
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600 # Don't update if cache is less than 1 hour old
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes # Start on boot
+
+    - name: Add user to docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+
+    # Note: User needs to log out and back in for group change to take effect.
+    # Or run: newgrp docker

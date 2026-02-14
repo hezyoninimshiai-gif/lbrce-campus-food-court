@@ -1,0 +1,39 @@
+# ──────────────────────────────────────────────
+# API CI Workflow
+# ──────────────────────────────────────────────
+# Builds the API Docker image on push to main branch.
+# This verifies that the Dockerfile builds successfully.
+#
+# No deployment step — deployment is done via Ansible.
+# No frontend CI — GitHub Pages deploys static files automatically.
+# ──────────────────────────────────────────────
+
+name: API CI
+
+on:
+    push:
+        branches: [main]
+        paths:
+            - "api/**" # Only run when API files change
+    pull_request:
+        branches: [main]
+        paths:
+            - "api/**"
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            # Step 1: Checkout the repository code
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            # Step 2: Build the Docker image
+            # This verifies that the Dockerfile is valid and all dependencies install correctly
+            - name: Build Docker image
+              run: docker build -t lbrce-api ./api
+
+            # Step 3: Verify the image was built successfully
+            - name: Verify image exists
+              run: docker images lbrce-api
